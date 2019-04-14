@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+<package name="card" extends="struts-default" namespace="/">
+    <action name="addCard" class="action.Card" method="add">
+        <result name="success">./jsp/crud/add/addSuccess.jsp</result>
+        <result name="fail">./jsp/crud/add/addfail.jsp</result>
+    </action>
+
+    <!--查询-->
+    <action name="queryCard" class="action.Card" method="queryAll">
+        <result name="success">./jsp/crud/query/queryCards.jsp</result>
+        <result name="error">/nihao.jsp</result>
+    </action>
+
+
+<!--查看详情-->
+    <action name="selectAll" class="action.Card" method="selectAll">
+        <result>./jsp/crud/query/detail.jsp</result>
+    </action>
+
+<!--删除页面转入-->
+    <action name="deleteCard1" class="action.Card" method="queryAll">
+        <result name="success">./jsp/crud/delete/deleteSelect.jsp</result>
+    </action>
+<!--删除一个-->
+    <action name="delete" class="action.Card" method="detele">
+        <result type="redirectAction">
+            <param name="pageCur">1</param>
+            <param name="actionName">deleteCard1</param>
+        </result>
+    </action>
+
+    <!--删除多个-->
+    <action name="delete2" class="action.Card" method="detele2">
+        <result type="redirectAction">
+            <param name="pageCur">1</param>
+            <param name="actionName">deleteCard1</param>
+        </result>
+    </action>
+
+
+    <!--进入修改-->
+    <action name="updateCard1" class="action.Card" method="queryAll">
+        <result name="success">./jsp/crud/update/updateSelect.jsp</result>
+    </action>
+
+    <!--修改查看详情-->
+    <action name="updateAll" class="action.Card" method="selectAll">
+        <result>./jsp/crud/update/updateCard.jsp</result>
+    </action>
+    <!--修改-->
+    <action name="update1" class="action.Card" method="update">
+       <result>./jsp/crud/update/updateSuccess.jsp</result>
+    </action>
+
+</package>
+</struts>

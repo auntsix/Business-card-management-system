@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <package name="user" namespace="/" extends="struts-default">
+        <action name="add" class="action.User" method="login">
+            <result>/jsp/login/main.jsp</result>
+            <result name="fail">/jsp/login/error.jsp</result>
+        </action>
+
+        <action name="updatePwd" class="action.User" method="updatePwd">
+            <!--密码修改成功界面-->
+            <result>/jsp/login/main.jsp</result>
+            <!--密码修改失败页面-->
+        </action>
+
+        <action name="isRegist" class="action.User" method="isRegist">
+            <result>/jsp/login/login2.jsp</result>
+            <result name="fail">/jsp/login/register.jsp</result>
+        </action>
+    </package>
+</struts>
