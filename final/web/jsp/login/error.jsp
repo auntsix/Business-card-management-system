@@ -17,7 +17,7 @@
 </head>
 <body>
     密码输入错误！
-    <a href="./login.jsp">重新登录</a>
+    <a href="/jsp/login/login.jsp">重新登录</a>
 
 </body>
 </html>

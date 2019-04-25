@@ -6,6 +6,8 @@
   Time: 18:48
   To change this template use File | Settings | File Templates.
 --%>
+
+<%--<!DOCTYPE html>--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" import="java.util.*" %>
 <%
     String path = request.getContextPath();
@@ -51,10 +53,10 @@
                 <td>
                     <s:if test="acard.logo!=null">
                         <img alt="" width="250" height="250"
-                        src=""/>
+                             src="<%=basePath%>image/<s:property value='acard.userName'/>/<s:property value='acard.logo'/>"/>
                     </s:if>
                     <s:else>
-                        没有logo
+                        没有图片
                     </s:else>
                 </td>
             </tr>

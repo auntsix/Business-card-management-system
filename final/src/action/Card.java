@@ -3,10 +3,13 @@ package action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import dao.daoimpl.cardDaoImpl;
+import org.apache.commons.io.FileUtils;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 import dao.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,11 +42,47 @@ public class Card  extends ActionSupport implements SessionAware, RequestAware {
   private int totalPage; //总页数
   Card card;
 
+  private File headImage;
+  private String headImageContentType;
+  private String headImageFileName;
+  private String endname;
+
   cardDao cardDao=new cardDaoImpl();
 
+//添加logo
+  public String addlogo(String userName) throws IOException{
+    String endName=headImageFileName.substring(headImageFileName.lastIndexOf("."));
+    String patternName[]={".jpg",".png",".gif"};
+    boolean b=false;
+    for(int i=0;i<patternName.length;i++){
+      String string =patternName[i];
+      if(string.equals(endName)){
+        b=true;
+        break;
+      }
+    }
+
+    String path="E:\\桌面\\大三下\\final\\web\\image\\"+userName;
+    File file = new File(path);
+    if(!file.exists()){//如果文件夹不存在
+      file.mkdir();//创建文件夹
+    }
+
+
+    FileUtils.copyFile(headImage,new File(file,headImageFileName));
+    System.out.println(new File(file,headImageFileName).getPath());
+    endname=new File(file,headImageFileName).getPath();
+        String temp[]=endname.split("\\\\");
+    String endname1=temp[temp.length-1];
+    return endname1;
+
+  }
+
+
+
   //添加
-  public String add() throws SQLException{
-    addcard=new Card(name,telephone,email,company,post,address,logo,(String)session.get("userName"));
+  public String add() throws SQLException,IOException{
+    addcard=new Card(name,telephone,email,company,post,address,addlogo((String)session.get("userName")),(String)session.get("userName"));
 
     if(cardDao.add(addcard)==true)
       return SUCCESS;
@@ -77,6 +116,7 @@ public class Card  extends ActionSupport implements SessionAware, RequestAware {
     acard = cardDao.qurey(id);
    int total= cardDao.selectAccount1((String)session.get("userName"));
     session.put("total",total);
+    System.out.println(acard.getUserName()+"   "+acard.getLogo());
     return SUCCESS;
   }
 
@@ -106,25 +146,63 @@ public class Card  extends ActionSupport implements SessionAware, RequestAware {
 
 
 //  修改
-    public String update() throws SQLException{
-        ucard=new Card(name,telephone,email,company,logo,id);
-        if(cardDao.update(ucard)==true)
-          return SUCCESS;
+    public String update() throws SQLException,IOException{
+        ucard=new Card(name,telephone,email,company,addlogo((String)session.get("userName")),id);
+
+        if(cardDao.update(ucard)==true){
+//          cardDao.delete(id,(String)session.get("userName"));
+          return SUCCESS;}
         else return ERROR;
     }
 
+  public Card(String name, String telephone, String email, String company, String logo,String userName,int id) {
+    this.name = name;
+    this.telephone = telephone;
+    this.email = email;
+    this.company = company;
+    this.logo = logo;
+    this.userName=userName;
+  }
 
+  public Card getCard() {
+    return card;
+  }
 
+  public void setCard(Card card) {
+    this.card = card;
+  }
 
+  public File getHeadImage() {
+    return headImage;
+  }
 
+  public void setHeadImage(File headImage) {
+    this.headImage = headImage;
+  }
 
+  public String getHeadImageContentType() {
+    return headImageContentType;
+  }
 
+  public void setHeadImageContentType(String headImageContentType) {
+    this.headImageContentType = headImageContentType;
+  }
 
+  public String getHeadImageFileName() {
+    return headImageFileName;
+  }
 
+  public void setHeadImageFileName(String headImageFileName) {
+    this.headImageFileName = headImageFileName;
+  }
 
+  public String getEndname() {
+    return endname;
+  }
 
-
-
+  public void setEndname(String endname) {
+    this.endname = endname;
+  }
 
   public int getId() {
     return id;
@@ -233,6 +311,17 @@ public class Card  extends ActionSupport implements SessionAware, RequestAware {
     this.email = email;
     this.company = company;
     this.post = post;
+    this.address = address;
+    this.logo = logo;
+    this.userName = userName;
+  }
+
+  public Card(int id, String name, String telephone, String email, String company, String address, String logo, String userName) {
+    this.id = id;
+    this.name = name;
+    this.telephone = telephone;
+    this.email = email;
+    this.company = company;
     this.address = address;
     this.logo = logo;
     this.userName = userName;

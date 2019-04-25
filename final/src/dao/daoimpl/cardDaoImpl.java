@@ -34,7 +34,8 @@ public class cardDaoImpl implements cardDao{
                 String company = rs.getString("company");
                 String address = rs.getString("address");
                 String logo = rs.getString("logo");
-                card = new Card(Id,name,telephone,email,company,address,logo);
+                String userName=rs.getString("userName");
+                card = new Card(Id,name,telephone,email,company,address,logo,userName);
             }
             return card;
         } catch (Exception e) {
@@ -236,6 +237,7 @@ public class cardDaoImpl implements cardDao{
             pstmt.setString(3,card.getEmail());
             pstmt.setString(4,card.getCompany());
             pstmt.setString(5,card.getLogo());
+//            pstmt.setString(6,card.getUserName());
             pstmt.setInt(6,card.getId());
             rows=pstmt.executeUpdate();
         } catch (Exception e) {

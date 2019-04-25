@@ -47,7 +47,7 @@
                 <td><s:textfield name="address" label="地址"/> </td>
             </tr>
             <tr>
-                <td><s:file name="logo" label="logo"/> </td>
+                <td><s:file name="headImage" label="logo"/> </td>
             </tr>
             <tr>
                 <td align="center"><s:submit value="提交"/> </td>

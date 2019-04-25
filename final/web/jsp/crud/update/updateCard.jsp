@@ -41,9 +41,10 @@
         <tr>
             <td><s:textfield name="company" label="单位" value="%{acard.company}"/> </td>
         </tr>
-            <td><s:file name="logo" label="logo"/>
+            <td><s:file name="headImage" label="logo"/>
                 <s:if test="acard.logo!=null">
-                    <img alt="" width="50" height="50">
+                    <img alt="" width="50" height="50"
+                         src="<%=basePath%>image/<s:property value='acard.userName'/>/<s:property value='acard.logo'/>"/>
                 </s:if>
             </td>
         </tr>

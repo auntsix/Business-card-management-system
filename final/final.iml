@@ -20,7 +20,6 @@
             <file>file://$MODULE_DIR$/src/struts.xml</file>
             <file>file://$MODULE_DIR$/src/conf/user.xml</file>
             <file>jar://$MODULE_DIR$/web/WEB-INF/lib/struts2-core-2.3.36.jar!/struts-default.xml</file>
-            <file>file://$MODULE_DIR$/src/action/User-validation.xml</file>
           </fileset>
           <propertiesKeys disabled="false" />
         </configuration>
